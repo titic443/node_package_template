@@ -1,3 +1,13 @@
-#Say Hello Function
+build module
 
-A list of not so helpful functions,
+npm run build
+
+login
+
+npm login
+
+##Before publish change tag version on package.json
+
+publish module
+
+npm publish

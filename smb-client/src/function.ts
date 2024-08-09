@@ -6,7 +6,12 @@ export class SMB {
     private username: string,
     private password: string,
     private domain: string
-  ) {}
+  ) { }
+
+  putFolder(remoteFolder: string, localFolder: string) {
+    const c = `smbclient ${this.shared} -U ${this.username}%${this.password} -W ${this.domain} -c "prompt; recurse;cd file_backup;mkdir ${remoteFolder};cd ${remoteFolder};  lcd ${localFolder}; mput *"`
+    execSync(c)
+  }
 
   putFile(remoteFolder: string, fileName: string) {
     // `smbclient //10.15.5.4/it-data$ -U titi.cha -c 'cd TESTApp; put "${newFileName}"' --password "For+ever16!" -W energyabsolute --max-protocol SMB3`;
@@ -20,6 +25,8 @@ export class SMB {
       console.error(`stderr: ${stderr}`);
     });
   }
+
+
 
   async downloadFile(
     remoteFolder: string,
